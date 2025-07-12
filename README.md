@@ -50,11 +50,10 @@ npm run dev
 ```
 
 🧪 Sample Prompts  
-Add 2kg basmati rice, 5 tomatoes  
 
-I want to cook biryani — what do I need?  
-
-Upload an image of a shopping list  
+1) Add 2kg basmati rice, 5 tomatoes  
+2) I want to cook biryani — what do I need?  
+3) Upload an image of a shopping list  
 
 🧑‍💻 Team  
 Made with ❤️ by Team CodeSparkers  
