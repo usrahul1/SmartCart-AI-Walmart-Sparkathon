@@ -12,53 +12,6 @@ system_prompts = {
     "issue": "You are a bug report assistant. Extract the user's issue into structured JSON. Reply ONLY in this format: {\"issue_type\": \"string\", \"description\": \"string\", \"priority\": \"High|Medium|Low\"}"
 }
 
-# def call_groq(prompt: str, mode: str = "cart") -> dict:
-#     """
-#     Calls Groq LLM with specified prompt and returns structured JSON.
-#     """
-#     try:
-#         response = client.chat.completions.create(
-#             messages=[
-#                 {"role": "system", "content": system_prompts[mode]},
-#                 {"role": "user", "content": prompt}
-#             ],
-#             model="llama3-70b-8192",  # You can use "mixtral-8x7b-32768" or others too
-#             stream=False
-#         )
-#         content = response.choices[0].message.content
-#         return eval(content)  
-#     except Exception as e:
-#         print(f"Groq error: {e}")
-#         return {"error": "Groq API failed"}
-
-# def call_groq(prompt: str, mode: str = "cart") -> dict:
-#     try:
-#         print(f"\n--- Calling Groq in mode: {mode} ---")
-#         response = client.chat.completions.create(
-#             messages=[
-#                 {"role": "system", "content": system_prompts[mode]},
-#                 {"role": "user", "content": prompt}
-#             ],
-#             model="llama3-70b-8192",
-#             stream=False
-#         )
-#         content = response.choices[0].message.content
-#         print("RAW RESPONSE:", content)  # 👈 this is important
-
-#         data = eval(content)
-
-#         # If cart mode failed, try issue
-#         if mode == "cart" and "items" not in data:
-#             print("Retrying in issue mode...")
-#             return call_groq(prompt, mode="issue")
-
-#         return data
-
-#     except Exception as e:
-#         print(f"Groq error: {e}")
-#         return {"error": "Groq API failed"}
-
-
 def try_parse_json(text: str):
     try:
         return json.loads(text)
@@ -86,7 +39,6 @@ def call_groq(prompt: str, mode: str = "cart") -> dict:
 
         parsed = try_parse_json(content)
 
-        # ✅ If fallback required:
         if not isinstance(parsed, dict) or (
             mode == "cart" and "items" not in parsed
         ):

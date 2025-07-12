@@ -9,12 +9,9 @@ reader = easyocr.Reader(['en'])
 
 @router.post("/")
 def chatbot_cart_handler(data: ChatInput):
-    """
-    Chatbot endpoint that takes user message and updates cart using Groq LLM.
-    """
+
     user_msg = data.message.strip().lower()
 
-    # Respond to greetings and general questions
     if user_msg in ["hi", "hello", "hey", "what can you do", "what do you do"]:
         return {
             "message": (
@@ -27,10 +24,8 @@ def chatbot_cart_handler(data: ChatInput):
             )
         }
 
-    # Call Groq to interpret the message
     groq_result = groq_service.call_groq(data.message, mode="cart")
 
-    # If items were extracted
     if "items" in groq_result and isinstance(groq_result["items"], list):
         for item in groq_result["items"]:
             try:
@@ -42,7 +37,6 @@ def chatbot_cart_handler(data: ChatInput):
             "cart": cart_service.get_cart(data.user_id)
         }
 
-    # Handle issue response if fallback switched to issue mode
     if "issue_type" in groq_result:
         from app.models.schemas import Issue
 
@@ -52,7 +46,7 @@ def chatbot_cart_handler(data: ChatInput):
             description=groq_result["description"],
             priority=groq_result["priority"]
         )
-        issue_service.save_issue(issue)  # ✅ SAVE THE ISSUE HERE
+        issue_service.save_issue(issue)
 
         return {
             "message": (
@@ -64,7 +58,6 @@ def chatbot_cart_handler(data: ChatInput):
         }
 
 
-    # Final fallback
     return {
         "message": (
             "Sorry, I couldn't understand that message. 😅\n\n"
@@ -104,7 +97,6 @@ async def handle_image_chat(user_id: str = Form(...), image: UploadFile = Form(.
 async def test_ocr_easyocr(image: UploadFile = File(...)):
     image.file.seek(0)
     img_bytes = await image.read()
-    # Pass bytes to EasyOCR
     result = reader.readtext(img_bytes, detail=0)
     text = " ".join(result)
     return {"extracted_text": text.strip()}

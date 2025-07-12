@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import ProductCard from "@/components/ProductCard";
 import type { Product } from "@/types";
 
-// Dummy products data
 const dummyProducts: Product[] = [
   {
     id: "1",

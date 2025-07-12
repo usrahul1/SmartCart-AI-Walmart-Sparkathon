@@ -1,6 +1,5 @@
 from app.models.schemas import Issue
 
-# In-memory issue tracker
 fake_issue_db: list[Issue] = []
 
 def save_issue(issue: Issue):

@@ -1,7 +1,6 @@
 from typing import Dict, List
 from app.models.schemas import CartItem, CartCreate
 
-# In-memory "cart" store: { user_id: [CartItem, ...] }
 fake_cart_db: Dict[str, List[CartItem]] = {}
 
 def create_cart(data: CartCreate):
