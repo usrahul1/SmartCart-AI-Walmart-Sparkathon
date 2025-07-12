@@ -49,15 +49,15 @@ npm install
 npm run dev
 ```
 
-🧪 Sample Prompts
-Add 2kg basmati rice, 5 tomatoes
+🧪 Sample Prompts  
+Add 2kg basmati rice, 5 tomatoes  
 
-I want to cook biryani — what do I need?
+I want to cook biryani — what do I need?  
 
-Upload an image of a shopping list
+Upload an image of a shopping list  
 
-🧑‍💻 Team
-Made with ❤️ by Team CodeSparkers
+🧑‍💻 Team  
+Made with ❤️ by Team CodeSparkers  
 Walmart Sparkathon 2025
 
 - [Sai Rahul Urumu](https://www.linkedin.com/in/usrahul) 
